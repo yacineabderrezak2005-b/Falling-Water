@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fallingwater — Anatomie d'un porte-à-faux · Dossier d'étude A3</title>
+<meta name="description" content="Recherche architecturale, analyse structurelle et plan de travail méthodologique : Fallingwater, Frank Lloyd Wright, 1935–1939. Géomorphologie de Bear Run, poutre en T inversé, post-tension, FRCM.">
+<meta property="og:title" content="Fallingwater — Anatomie d'un porte-à-faux">
+<meta property="og:description" content="Dossier d'étude A3 : histoire, structure, pathologies, conservation et méthodologie de recherche.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,640;1,9..144,400;1,9..144,560&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#100e0b; --bg2:#161310; --card:#1c1813; --line:rgba(232,226,214,.11);
+  --ink:#eae3d4; --mut:#a89e8d; --red:#c04a30; --red2:#e06a4a; --ocre:#cfa254;
+  --stone:#8f877a; --paper:#ece4d3; --pink:#241f16; --pmut:#4a4237; --pline:#d9cebb;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.72 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--red);color:#fff}
+img{max-width:100%}
+a{color:var(--ocre)}
+section[id]{scroll-margin-top:76px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,44px)}
+.sec{padding:clamp(72px,9vw,122px) 0;position:relative}
+.kicker{font:500 12px/1.4 "IBM Plex Mono",monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--red);margin-bottom:18px}
+.kicker::before{content:"—— ";color:var(--red);opacity:.6}
+h2{font-family:Fraunces,serif;font-weight:560;font-size:clamp(30px,4.3vw,50px);line-height:1.08;letter-spacing:-.012em;margin-bottom:20px;max-width:26ch}
+h2 em{font-style:italic;color:var(--ocre)}
+h3{font-family:Fraunces,serif;font-weight:560;font-size:clamp(19px,2vw,23px);margin-bottom:8px}
+.lede{font-size:clamp(16.5px,1.55vw,19.5px);color:var(--mut);max-width:72ch;margin-bottom:14px}
+.lede strong,p strong{color:var(--ink);font-weight:600}
+.prose p{max-width:74ch;margin:0 0 16px;color:var(--mut)}
+.prose p strong{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 8px}
+.chip{font:500 12px/1.5 "IBM Plex Mono",monospace;letter-spacing:.04em;padding:8px 13px;border:1px solid var(--line);border-radius:999px;color:var(--mut);background:var(--card)}
+.chip b{color:var(--ocre);font-weight:600}
+.cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:26px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;transition:border-color .3s}
+.card:hover{border-color:rgba(207,162,84,.4)}
+.card h3{font-size:19px}
+.card p{font-size:14.2px;color:var(--mut);margin:0}
+.card .tag{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.18em;color:var(--red);text-transform:uppercase;display:block;margin-bottom:10px}
+
+/* ---------- topbar ---------- */
+#progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--red),var(--ocre));z-index:80}
+.top{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;align-items:center;gap:18px;height:62px;padding:0 22px;background:rgba(14,12,9,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.brand{font-family:Fraunces,serif;font-weight:640;font-size:17px;color:var(--ink);text-decoration:none;line-height:1.05;display:flex;flex-direction:column}
+.brand span{font:500 9.5px "IBM Plex Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);margin-top:2px}
+#nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+#nav::-webkit-scrollbar{display:none}
+#nav a{font:500 11.5px "IBM Plex Mono",monospace;letter-spacing:.06em;color:var(--mut);text-decoration:none;padding:8px 10px;border-radius:8px;text-transform:uppercase;white-space:nowrap}
+#nav a:hover{color:var(--ink)}
+#nav a.active{color:var(--ink);background:rgba(232,226,214,.08)}
+#burger{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink);font-size:18px;border-radius:8px;padding:6px 12px;cursor:pointer}
+@media(max-width:1060px){
+  #nav{position:fixed;top:62px;left:0;right:0;flex-direction:column;background:rgba(13,11,8,.97);padding:14px 18px;display:none;border-bottom:1px solid var(--line);overflow:visible}
+  #nav.open{display:flex}
+  #burger{display:block}
+}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;align-items:flex-end;position:relative;overflow:hidden}
+.hero-media{position:absolute;inset:0;background:linear-gradient(160deg,#241f18,#100e0b)}
+.hero-media img{width:100%;height:100%;object-fit:cover;filter:saturate(.92) brightness(.85)}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,14,11,.7),rgba(16,14,11,.2) 38%,rgba(16,14,11,.88) 78%,var(--bg))}
+.hero-in{position:relative;z-index:2;padding:120px clamp(18px,5vw,64px) 96px;max-width:1180px;margin:0 auto;width:100%}
+.hero .kicker{color:#d8cdb8}
+h1{font-family:Fraunces,serif;font-weight:640;font-size:clamp(56px,11vw,148px);line-height:.95;letter-spacing:-.02em;margin:14px 0 20px}
+h1 em{font-style:italic;font-weight:400;color:var(--ocre)}
+.h-sub{font-size:clamp(15px,1.9vw,19px);color:#ddd5c4;max-width:66ch;margin-bottom:34px}
+.h-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;max-width:880px}
+.h-stat{background:rgba(15,13,10,.72);backdrop-filter:blur(8px);padding:18px 20px}
+.h-stat b{display:block;font:600 29px/1.1 "IBM Plex Mono",monospace;color:var(--ink)}
+.h-stat b small{font-size:15px;color:var(--red2)}
+.h-stat span{font-size:12.3px;color:var(--mut);letter-spacing:.02em;display:block;margin-top:4px}
+.h-credit{font:11px "IBM Plex Mono",monospace;color:#8a8172;letter-spacing:.14em;text-transform:uppercase;margin-top:16px}
+.scroll-cue{position:absolute;left:50%;transform:translateX(-50%);bottom:16px;z-index:2;font:500 11px "IBM Plex Mono",monospace;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);text-decoration:none;animation:cue 2.4s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,7px)}}
+
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--bg2);padding:13px 0}
+.mq{display:flex;width:max-content;animation:mq 46s linear infinite;font:500 12.5px "IBM Plex Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);white-space:nowrap}
+.mq span{padding-right:56px}
+.mq i{font-style:normal;color:var(--red);padding:0 14px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- blocs ---------- */
+.grid2{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(26px,4vw,56px);align-items:start;margin-top:10px}
+@media(max-width:920px){.grid2{grid-template-columns:1fr}}
+figure.ph{margin:20px 0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+figure.ph img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;cursor:zoom-in}
+figure.ph.portrait img{aspect-ratio:4/4.6}
+figcaption{font:11.5px/1.6 "IBM Plex Mono",monospace;color:var(--mut);padding:10px 14px;border-top:1px solid var(--line);letter-spacing:.03em}
+blockquote{border-left:2px solid var(--red);padding:4px 0 4px 22px;margin:28px 0;font-family:Fraunces,serif;font-style:italic;font-size:clamp(19px,2.3vw,25px);line-height:1.42;color:var(--ink)}
+blockquote footer{font:500 12px "IBM Plex Mono",monospace;color:var(--mut);margin-top:10px;font-style:normal;letter-spacing:.1em;text-transform:uppercase}
+.callout{border:1px dashed rgba(207,162,84,.45);background:rgba(207,162,84,.05);border-radius:14px;padding:22px 24px;margin:24px 0}
+.callout p{color:var(--mut);margin:0;font-size:15px}
+.callout p strong{color:var(--ink)}
+.tl{position:relative;margin:30px 0 8px;padding-left:26px;border-left:1px solid var(--line)}
+.tl-item{position:relative;padding:0 0 28px 20px}
+.tl-item:last-child{padding-bottom:4px}
+.tl-item::before{content:"";position:absolute;left:-31px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(192,74,48,.16)}
+.tl-item time{font:600 13px "IBM Plex Mono",monospace;color:var(--ocre);letter-spacing:.1em;display:block;margin-bottom:5px}
+.tl-item p{font-size:14.5px;color:var(--mut);max-width:72ch;margin:0}
+.tl-item p strong{color:var(--ink)}
+.tscroll{overflow-x:auto;margin:22px 0}
+table{width:100%;min-width:720px;border-collapse:collapse;font-size:14px}
+th{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--ocre);text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--mut)}
+td:first-child{color:var(--ink);font-weight:600}
+tbody tr:hover td{background:rgba(232,226,214,.025)}
+.devices{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:22px 0}
+.device{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.device b.n{display:block;font:italic 560 30px Fraunces,serif;color:var(--red);margin-bottom:8px}
+.device h3{font-size:17px;margin-bottom:6px}
+.device p{font-size:13.8px;color:var(--mut);margin:0}
+.pal{display:flex;flex-direction:column;gap:12px;margin:18px 0}
+.pal div{display:flex;align-items:center;gap:12px;font:12.5px "IBM Plex Mono",monospace;color:var(--mut)}
+.pal i{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);flex:none}
+.mini2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:20px 0}
+
+/* steel bars viz */
+.steel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:20px 0}
+.srow{display:grid;grid-template-columns:minmax(150px,220px) 1fr 42px;align-items:center;gap:12px;font:500 12px "IBM Plex Mono",monospace;color:var(--mut);padding:7px 0}
+.srow b{font:600 17px "IBM Plex Mono",monospace;color:var(--ink);text-align:right}
+.ticks{display:flex;gap:4px;flex-wrap:wrap}
+.ticks i{width:8px;height:20px;background:#453d2f;border-radius:2px}
+.srow.red .ticks i{background:var(--red)}
+@media(max-width:640px){.srow{grid-template-columns:1fr;gap:6px}.srow b{text-align:left}}
+
+/* diagram */
+.diagram{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(12px,2vw,26px);margin:30px 0}
+.diagram svg{width:100%;height:auto;display:block}
+.sl{font:500 11.5px "IBM Plex Mono",monospace;fill:#b3a892}
+.sl.sm{font-size:10.3px;fill:#877d6c}
+.d-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.d-controls label{font:500 12px "IBM Plex Mono",monospace;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
+input[type=range]{flex:1;min-width:180px;-webkit-appearance:none;appearance:none;height:4px;background:#37301f? ;background:#3a3226;border-radius:99px;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--red);border:2px solid #e8e2d6;cursor:pointer}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border-radius:50%;background:var(--red);border:2px solid #e8e2d6;cursor:pointer}
+.kbtn{font:500 12px "IBM Plex Mono",monospace;letter-spacing:.06em;padding:8px 13px;border:1px solid var(--line);background:transparent;color:var(--mut);border-radius:9px;cursor:pointer;transition:.25s}
+.kbtn:hover{color:var(--ink);border-color:var(--red)}
+.kbtn.on{color:var(--ink);border-color:var(--red);background:rgba(192,74,48,.12)}
+.readout{display:flex;gap:30px;flex-wrap:wrap;align-items:flex-start;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
+.readout b{font:600 26px "IBM Plex Mono",monospace;color:var(--ink)}
+.readout small{display:block;color:var(--mut);font:500 10.5px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px}
+#dStatus{flex:1 1 260px;font-size:14px;color:var(--ocre);line-height:1.55;align-self:center}
+#momentG{transition:opacity .5s}
+
+/* gauges */
+.gauges{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:26px 0}
+.gauge{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px}
+.g-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font:600 12.5px "IBM Plex Mono",monospace;letter-spacing:.03em;flex-wrap:wrap}
+.g-nums em{color:var(--mut);font-style:normal;font-weight:400}
+.g-bar{position:relative;height:10px;background:#282217;border-radius:99px;margin:15px 0 10px}
+.g-bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:99px;background:linear-gradient(90deg,var(--red),var(--red2));transition:width 1.5s cubic-bezier(.2,.7,.2,1)}
+.g-bar u{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ocre)}
+.g-note{font-size:12.5px;color:var(--mut);margin:0}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin:22px 0}
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.step b.n{display:block;font:italic 560 28px Fraunces,serif;color:var(--ocre);margin-bottom:8px}
+.step h3{font-size:16.5px;margin-bottom:6px}
+.step p{font-size:13.5px;color:var(--mut);margin:0}
+.dots{list-style:none;margin:14px 0}
+.dots li{position:relative;padding:0 0 14px 24px;font-size:14.5px;color:var(--mut);max-width:76ch}
+.dots li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.dots li strong{color:var(--ink)}
+.rcards{display:grid;gap:14px;margin:20px 0}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;display:grid;grid-template-columns:230px 1fr 1fr;gap:16px}
+.rcard h4{font-family:Fraunces,serif;font-weight:560;font-size:16.5px;color:var(--ink);line-height:1.35}
+.rcard p{font-size:13.2px;color:var(--mut);margin:0}
+.rcard p b{color:var(--ocre);font:600 10.5px "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:4px}
+@media(max-width:800px){.rcard{grid-template-columns:1fr}}
+
+/* method (paper) */
+.paper{background:var(--paper);color:var(--pink)}
+.paper .kicker{color:#a53d26}
+.paper h2{color:#1c1812}
+.paper .lede,.paper .prose p{color:var(--pmut)}
+.paper .lede strong,.paper p strong{color:#1c1812}
+.paper .card{background:#fff;border-color:var(--pline)}
+.paper .chip{background:#fff;border-color:var(--pline);color:var(--pmut)}
+.paper .chip b{color:#a53d26}
+.axis{cursor:pointer;text-align:left}
+.axis.active{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
+#axisChoice{font-family:Fraunces,serif;font-style:italic;font-size:clamp(16px,2vw,19px);color:#7c3a20;margin-top:4px}
+.phase{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:24px 0;border-top:1px solid var(--pline)}
+.phase:last-of-type{border-bottom:1px solid var(--pline)}
+.ph-w{font:600 13px "IBM Plex Mono",monospace;color:#a53d26;letter-spacing:.08em}
+.ph-w span{display:block;color:#8a7c64;font-weight:500;font-size:11.5px;margin-top:6px;letter-spacing:.04em}
+.phase p{font-size:14.2px;color:var(--pmut);margin:0 0 10px;max-width:none}
+.deliv{background:rgba(165,61,38,.07);border:1px dashed rgba(165,61,38,.5);border-radius:10px;padding:12px 15px;font-size:13.5px;color:#3a2f22}
+.deliv b{font:600 10.5px "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#a53d26;display:block;margin-bottom:3px}
+@media(max-width:760px){.phase{grid-template-columns:1fr;gap:8px}}
+
+/* biblio */
+.biblio{margin-top:10px}
+.biblio details{border-top:1px solid var(--pline)}
+.biblio details:last-of-type{border-bottom:1px solid var(--pline)}
+.biblio summary{cursor:pointer;font:600 16px Inter,sans-serif;display:flex;align-items:center;gap:14px;padding:18px 4px;list-style:none;color:#1c1812}
+.biblio summary::-webkit-details-marker{display:none}
+.biblio summary::after{content:"+";margin-left:auto;font:400 22px "IBM Plex Mono",monospace;color:#a53d26;transition:transform .3s}
+.biblio details[open] summary::after{transform:rotate(45deg)}
+.cnt{font:600 11px "IBM Plex Mono",monospace;color:#a53d26;border:1px solid currentColor;border-radius:99px;padding:2px 10px}
+.bib{padding:2px 4px 26px;display:grid;gap:16px;max-width:88ch}
+.bib p{margin:0;font-size:14px;color:var(--pmut);line-height:1.65}
+.bib b{color:#1c1812}
+.bib .id{font:500 11.5px "IBM Plex Mono",monospace;color:#8a7c64;white-space:nowrap}
+
+/* galerie */
+.gal{columns:3 300px;column-gap:14px;margin-top:16px}
+.gitem{break-inside:avoid;margin:0 0 14px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--card)}
+.gitem img{width:100%;display:block;cursor:zoom-in}
+.gitem figcaption{border-top:1px solid var(--line)}
+#galNote{font:500 11.5px "IBM Plex Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-top:14px}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(9,7,5,.95);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px 30px}
+.lb[hidden]{display:none}
+.lb img{max-width:min(1500px,94vw);max-height:76vh;object-fit:contain;border-radius:10px;box-shadow:0 20px 80px rgba(0,0,0,.6)}
+.lb-cap{color:var(--mut);font:12px/1.6 "IBM Plex Mono",monospace;margin-top:14px;text-align:center;max-width:80ch}
+.lb-cap a{color:var(--ocre)}
+.lb button{background:none;border:none;color:var(--mut);cursor:pointer;font-family:"IBM Plex Mono",monospace}
+.lb button:hover{color:var(--ink)}
+.lb .x{position:absolute;top:16px;right:22px;font-size:24px}
+.lb .pv,.lb .nx{position:absolute;top:50%;transform:translateY(-50%);font-size:32px;padding:14px 18px}
+.lb .pv{left:6px}.lb .nx{right:6px}
+
+/* footer */
+.foot{background:var(--bg2);border-top:1px solid var(--line);padding:56px 0 72px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:34px}
+.foot h4{font:600 11px "IBM Plex Mono",monospace;letter-spacing:.2em;text-transform:uppercase;color:var(--ocre);margin-bottom:12px}
+.foot p{font-size:13.5px;color:var(--mut);margin:0}
+.foot a{color:var(--ocre)}
+.fbrand{font-family:Fraunces,serif;font-weight:640;font-size:22px;color:var(--ink)}
+.toplink{display:inline-block;margin-top:20px;font:500 12px "IBM Plex Mono",monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);text-decoration:none}
+.toplink:hover{color:var(--ink)}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{transition:none;opacity:1;transform:none}
+  .mq,.scroll-cue{animation:none}
+  html{scroll-behavior:auto}
+  .g-bar i{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header class="top">
+  <a class="brand" href="#hero">FALLINGWATER<span>Dossier d'étude · Licence 3</span></a>
+  <button id="burger" aria-label="Ouvrir le menu">☰</button>
+  <nav id="nav" aria-label="Navigation principale">
+    <a href="#paradoxe">Paradoxe</a>
+    <a href="#histoire">Histoire</a>
+    <a href="#site">Site</a>
+    <a href="#espace">Espace</a>
+    <a href="#structure">Structure</a>
+    <a href="#pathologies">Pathologies</a>
+    <a href="#conservation">Conservation</a>
+    <a href="#methode">Méthode L3</a>
+    <a href="#biblio">Bibliothèque</a>
+    <a href="#galerie">Galerie</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <img id="heroImg" alt="Fallingwater, la maison sur la cascade — Mill Run, Pennsylvanie" data-chain='["https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater%20-%20DSC05639.JPG?width=2000","https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater2.jpg?width=2000","https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater3.jpg?width=2000","https://commons.wikimedia.org/wiki/Special:FilePath/FallingwaterHartz1.jpg?width=2000"]'>
+  </div>
+  <div class="hero-veil"></div>
+  <div class="hero-in">
+    <p class="kicker">Maison Edgar J. Kaufmann · Mill Run, Pennsylvanie · 39°54′22″N — 79°28′5″W</p>
+    <h1>Falling<em>water</em></h1>
+    <p class="h-sub">Recherche architecturale, analyse structurelle et plan de travail méthodologique — <strong>Frank Lloyd Wright, 1935–1939</strong>. Une triple lecture : morpho-spatiale, historico-critique et tectonique-structurelle.</p>
+    <div class="h-stats">
+      <div class="h-stat"><b><span class="num" data-to="4.6" data-dec="1">0</span> <small>m</small></b><span>de porte-à-faux libre au-dessus de Bear Run</span></div>
+      <div class="h-stat"><b><span class="num" data-to="180">0</span> <small>mm</small></b><span>de flèche cumulée atteinte en 1995</span></div>
+      <div class="h-stat"><b><span class="num" data-to="41720">0</span> <small>psi</small></b><span>de traction acier — limite élastique 42 000 psi</span></div>
+      <div class="h-stat"><b><span class="num" data-to="50">0</span><small>+</small></b><span>points d'infiltration chroniques diagnostiqués</span></div>
+    </div>
+    <p class="h-credit">Photographie · Wikimedia Commons</p>
+  </div>
+  <a class="scroll-cue" href="#paradoxe">▼ Explorer le dossier</a>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="mq">
+    <span>porte-à-faux<i>✦</i>béton armé<i>✦</i>grès de Pottsville<i>✦</i>poutre en T inversé<i>✦</i>moment fléchissant négatif<i>✦</i>fluage du béton<i>✦</i>rotule plastique<i>✦</i>post-tension extérieure<i>✦</i>étanchéité IRMA<i>✦</i>matrices FRCM<i>✦</i>UNESCO 2019<i>✦</i></span>
+    <span>porte-à-faux<i>✦</i>béton armé<i>✦</i>grès de Pottsville<i>✦</i>poutre en T inversé<i>✦</i>moment fléchissant négatif<i>✦</i>fluage du béton<i>✦</i>rotule plastique<i>✦</i>post-tension extérieure<i>✦</i>étanchéité IRMA<i>✦</i>matrices FRCM<i>✦</i>UNESCO 2019<i>✦</i></span>
+  </div>
+</div>
+
+<main>
+
+<!-- ================= 00 PARADOXE ================= -->
+<section id="paradoxe" class="sec">
+  <div class="wrap">
+    <p class="kicker reveal">00 — Le paradoxe fondateur</p>
+    <h2 class="reveal">« La maison sur la cascade » est aussi un <em>navire qui coule lentement</em>.</h2>
+    <p class="lede reveal">Réussir une étude de Licence 3 sur Fallingwater exige de dépasser la célébration esthétique pour articuler une triple lecture — morpho-spatiale, historico-critique et tectonique-structurelle — croisant géomorphologie du site, phénoménologie wrightienne, calcul aux éléments finis et physique des matériaux de conservation.</p>
+    <div class="cards3 reveal">
+      <div class="card"><span class="tag">Lecture 1</span><h3>Morpho-spatiale</h3><p>Phénoménologie wrightienne : compression–dilatation, « destruction de la boîte », matérialité du grès et du béton.</p></div>
+      <div class="card"><span class="tag">Lecture 2</span><h3>Historico-critique</h3><p>Grande Dépression, New Deal, débats du MoMA 1932, consécration de 1938, patrimonialisation jusqu'à l'UNESCO 2019.</p></div>
+      <div class="card"><span class="tag">Lecture 3</span><h3>Tectonique-structurelle</h3><p>Système hybride, erreur de ferraillage, pathologies 1936–1995, retrofit par post-tension et FRCM (1995–2026).</p></div>
+    </div>
+    <div class="grid2">
+      <div class="prose reveal">
+        <p>Pensée comme un jalon majeur de <strong>l'architecture organique américaine</strong> — fusionnant les strates de grès pennsylvanien de la formation de Pottsville avec des plateaux de béton armé en porte-à-faux au-dessus du torrent Bear Run —, Fallingwater souffre <strong>dès 1936</strong> d'un sous-dimensionnement critique des aciers de traction face au moment fléchissant négatif : omission des armatures négatives par l'ingénieur <strong>Mendel Glickman</strong>, transfert parasite des charges de la terrasse du deuxième étage par <strong>quatre meneaux de fenêtre en acier en T</strong>, et fluage continu du béton.</p>
+        <p>Résultat : une <strong>flèche cumulée de 7 pouces (≈ 180 mm)</strong> sur une portée libre de <strong>15 pieds (4,6 m)</strong>, l'acier porté au voisinage immédiat de sa limite d'élasticité (41 720 psi pour une limite de 42 000 psi) et une <strong>rotule plastique</strong> au droit des culées.</p>
+        <p>Parallèlement, l'absence d'étanchéité d'origine aux jonctions pierre-béton et l'exposition permanente à l'humidité sous ses trois états (eau liquide, vapeur saturée, gel hivernal) génèrent <strong>plus de 50 points d'infiltration chronique</strong>. Inscrite en juillet 2019 au patrimoine mondial de l'UNESCO (réf. 1496rev-005, critère ii), la demeure est devenue un véritable <strong>laboratoire international de sauvegarde du patrimoine moderne</strong> : précontrainte extérieure par post-tension (Robert Silman Associates, 2001–2002), réfection des complexes d'étanchéité (WASA, 2001–2005), consolidations FRCM menées jusqu'en 2026.</p>
+      </div>
+      <div class="reveal">
+        <figure class="ph">
+          <img class="zoomable" alt="Fallingwater vue depuis le torrent" data-chain='["https://commons.wikimedia.org/wiki/Special:FilePath/FallingwaterHartz1.jpg?width=1400","https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater6.jpg?width=1400","https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater3.jpg?width=1400"]'>
+          <figcaption>Fallingwater émergeant des lauriers — Wikimedia Commons (cliquer pour agrandir)</figcaption>
+        </figure>
+        <div class="callout">
+          <p><strong>L'enjeu du dossier :</strong> tenir ensemble l'image d'une architecture défiant la gravité en harmonie avec le roc, et la réalité mécanique d'une structure que sauvent, invisibles, des câbles de post-tension et des matrices cimentaires renforcées de fibres.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 01 HISTOIRE ================= -->
+<section id="histoire" class="sec" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker reveal">01 — Cadrage historique</p>
+    <h2 class="reveal">Une œuvre née de la Dépression, <em>riposte au Style international</em></h2>
+    <div class="grid2">
+      <div class="prose reveal">
+        <p>En <strong>1934</strong>, Frank Lloyd Wright (1867–1959), alors âgé de 67 ans, traverse une période de raréfaction de la commande bâtie — césure historiographique entre « première carrière » (Prairie Houses) et « seconde carrière ». Comme l'analyse <strong>Catherine W. Zipf (2021)</strong>, Fallingwater peut être lue comme un monument de l'ère de la Dépression et du <strong>New Deal</strong>, né de la rencontre entre un architecte cherchant à réinventer sa pratique et <strong>Edgar J. Kaufmann, Sr.</strong>, propriétaire d'un grand magasin à Pittsburgh. C'est le fils, <strong>Edgar Kaufmann, jr.</strong> — bref apprenti à Taliesin —, qui invite Wright à visiter la propriété familiale de Bear Run en <strong>décembre 1934</strong>.</p>
+        <p>Sur le plan théorique, le projet répond aux débats ouverts par l'exposition <em>Modern Architecture: International Exhibition</em> (MoMA, 1932) de <strong>Hitchcock et Johnson</strong>, qui avait qualifié Wright de « meilleur des nouveaux traditionalistes ». En exploitant les portées du béton armé en porte-à-faux tout en rejetant les systèmes normatifs au profit d'un ancrage dans le roc, Wright affirme la vitalité de son architecture organique face au Style International. Consécration immédiate : exposition monographique au MoMA (<em>A New House by Frank Lloyd Wright on Bear Run, Pennsylvania</em>, janvier 1938) et couverture du magazine <strong>Time le 17 janvier 1938</strong>.</p>
+        <p>Donnée en 1963 par Edgar Kaufmann, jr. au <strong>Western Pennsylvania Conservancy</strong> et ouverte au public en 1964, la demeure est inscrite au <em>National Register of Historic Places</em> le 23 juillet 1974 (n° 74001781), désignée <em>National Historic Landmark</em>, élue par l'AIA en 1991 « <strong>meilleure œuvre de tous les temps produite par un architecte américain</strong> », puis inscrite en 2019 à l'UNESCO au titre du bien en série <em>L'architecture du XXᵉ siècle de Frank Lloyd Wright</em> — première reconnaissance de l'architecture moderne américaine par l'UNESCO.</p>
+        <div class="chips">
+          <span class="chip"><b>35 000 $</b> estimé → <b>155 000 $</b> réalisés (≈ 2,8 M$ 2025)</span>
+          <span class="chip"><b>650 m²</b> au total — dont plus de la moitié en terrasses</span>
+          <span class="chip">maison principale <b>~495 m²</b> · maison d'hôtes <b>~158 m²</b></span>
+          <span class="chip">chantier <b>avr. 1936 → oct. 1937</b> · hôtes achevées <b>sept. 1939</b></span>
+        </div>
+      </div>
+      <div class="reveal">
+        <figure class="ph">
+          <img class="zoomable" alt="Fallingwater — les plateaux de béton en porte-à-faux au-dessus de Bear Run" data-chain='["https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater2.jpg?width=1400","https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater3.jpg?width=1400","https://commons.wikimedia.org/wiki/Special:FilePath/FallingwaterHartz1.jpg?width=1400"]'>
+          <figcaption>Les plateaux de béton en porte-à-faux — Wikimedia Commons</figcaption>
+        </figure>
+        <figure class="ph portrait">
+          <img class="zoomable" alt="Portrait de Frank Lloyd Wright" data-chain='["https://commons.wikimedia.org/wiki/Special:FilePath/Frank%20Lloyd%20Wright%20-%201954.jpg?width=700","https://commons.wikimedia.org/wiki/Special:FilePath/Frank%20Lloyd%20Wright%20portrait.jpg?width=700"]'>
+          <figcaption>Frank Lloyd Wright (1867–1959) · Wikimedia Commons</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="reveal">
+      <h3 style="margin-top:38px">Chronologie institutionnelle</h3>
+      <div class="tl">
+        <div class="tl-item"><time>DÉC. 1934</time><p>Visite de la propriété de Bear Run par Wright, à l'invitation d'Edgar Kaufmann, jr.</p></div>
+        <div class="tl-item"><time>1935</time><p>Conception du projet ; ouverture de la carrière de grès sur le site.</p></div>
+        <div class="tl-item"><time>FÉV. 1936</time><p>Les ingénieurs de Pittsburgh relèvent huit problèmes structurels ; Metzger-Richardson double les barres d'armature (8 → 16).</p></div>
+        <div class="tl-item"><time>AVR. 1936 – OCT. 1937</time><p>Construction de la maison principale ; emménagement en novembre 1937.</p></div>
+        <div class="tl-item"><time>JANV. 1938</time><p>Exposition au MoMA et couverture de <em>Time</em> : relance durable de la notoriété internationale de Wright.</p></div>
+        <div class="tl-item"><time>SEPT. 1939</time><p>Achèvement de la maison d'hôtes, de l'aile des domestiques et de l'abri d'auto (versant nord).</p></div>
+        <div class="tl-item"><time>1963 – 1964</time><p>Donation à la Western Pennsylvania Conservancy ; ouverture au public comme musée.</p></div>
+        <div class="tl-item"><time>1974 · 1991</time><p>Inscription au National Register (74001781), National Historic Landmark ; prix AIA « meilleure œuvre de tous les temps ».</p></div>
+        <div class="tl-item"><time>JUIL. 2019</time><p>Inscription au patrimoine mondial de l'UNESCO — 1496rev-005, critère (ii).</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 SITE ================= -->
+<section id="site" class="sec">
+  <div class="wrap">
+    <p class="kicker reveal">02 — Site &amp; géologie</p>
+    <h2 class="reveal">Bear Run, la formation de <em>Pottsville</em> et le mimétisme structurel</h2>
+    <div class="grid2">
+      <div class="prose reveal">
+        <p>L'implantation à Mill Run (Stewart Township, comté de Fayette, Laurel Highlands du sud-ouest de la Pennsylvanie) s'appuie sur la géologie et l'hydrologie locales. Le torrent <strong>Bear Run</strong>, qui coule à environ 1 298 pieds (395 m) d'altitude au cœur d'une réserve naturelle de 5 000 à 5 100 acres, s'inscrit dans un réseau continental : Youghiogheny, Monongahela, Ohio, Mississippi, golfe du Mexique et océan Atlantique.</p>
+        <p>Comme l'expose la première étude géologique dédiée au site (Dr Fred Zelt, GSA Field Guide 66, septembre 2023), la morphologie en <strong>« marches d'escalier »</strong> des cascades résulte d'une stratification cyclique datant du Pennsylvanien. Le substrat appartient à la <strong>formation de Pottsville</strong> : bancs de grès quartzeux et calcareux résistants — dont le membre du <strong>grès de Fallingwater</strong>, les grès de Connoquenessing et de Homewood — interstratifiés de schistes argileux, de calcaires et de charbons. L'érosion différentielle a creusé les couches tendres, laissant les bancs de grès <strong>en surplomb au-dessus d'une chute de 20 à 30 pieds (6 à 9 m)</strong>.</p>
+        <p>La carrière de grès calcareux ouverte sur le site dès 1935 fournit la maçonnerie porteuse en <strong>moellons stratifiés horizontalement</strong> et les dallages de sol de 1/2 à 1,5 pouce d'épaisseur : les dalles de béton en porte-à-faux font écho aux bancs rocheux horizontaux en surplomb — un mimétisme structurel assumé.</p>
+      </div>
+      <div class="reveal">
+        <figure class="ph">
+          <img class="zoomable" alt="Cascade de Bear Run sous la maison" data-chain='["https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater%20Waterfall.jpg?width=1400","https://commons.wikimedia.org/wiki/Special:FilePath/FallingwaterHartz1.jpg?width=1400","https://commons.wikimedia.org/wiki/Special:FilePath/Fallingwater1.jpg?width=1400"]'>
+          <figcaption>Bear Run et ses marches d'escalier — Wikimedia Commons</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="tscroll reveal">
+      <table>
+        <thead><tr><th>Paramètre géographique / tectonique</th><th>Spécification technique et contextuelle</th><th>Rôle dans la conception de Wright</th></tr></thead>
+        <tbody>
+          <tr><td>Localisation &amp; protection</td><td>Mill Run, Stewart Township, PA (39°54′22″N, 79°28′5″W) ; réserve de Bear Run (5 100 acres)</td><td>Zone cœur UNESCO de 11,212 ha (27,71 acres) et zone tampon forestière de 282,299 ha (697,58 acres)</td></tr>
+          <tr><td>Stratigraphie géologique</td><td>Formation de Pottsville (Pennsylvanien) : grès calcareux massif sur schistes/calcaires érodés</td><td>Mimétisme structurel : les dalles en porte-à-faux font écho aux bancs rocheux horizontaux en surplomb</td></tr>
+          <tr><td>Approvisionnement matière</td><td>Carrière de grès calcareux ouverte sur le site de Mill Run dès 1935</td><td>Maçonnerie porteuse en moellons stratifiés ; dallages de 1/2 à 1,5 pouce d'épaisseur</td></tr>
+          <tr><td>Orientation héliotropique</td><td>Rive nord de Bear Run ; rotation de 30° dans le sens antihoraire par rapport au plein sud</td><td>Ensoleillement naturel de chaque pièce, maison insérée parallèlement au cours d'eau</td></tr>
+          <tr><td>Ancrage topographique</td><td>Rocher naturel en place conservé intact à travers la dalle du séjour</td><td>Le rocher sur lequel la famille s'asseyait émerge devant l'âtre pour former le foyer de la cheminée</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout reveal">
+      <p><strong>Le geste majeur :</strong> alors que la famille Kaufmann envisageait une maison <em>face</em> à la cascade pour en jouir visuellement, Wright positionne l'édifice <strong>directement au-dessus de la chute, sur la rive nord</strong> — intégrant l'eau à la vie quotidienne non pas comme un tableau à distance, mais par une <strong>présence sonore permanente</strong> où le fracas résonne dans toute la demeure.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 03 ESPACE ================= -->
+<section id="espace" class="sec" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker reveal">03 — Phénoménologie spatiale</p>
+    <h2 class="reveal">Compression–dilatation et <em>« destruction de la boîte »</em></h2>
+    <div class="prose reveal">
+      <p>Le parcours architectural met en scène la séquence de <strong>compression et dilatation</strong>. L'accès s'effectue par un <strong>pont de 28 pieds (8,5 m)</strong> franchissant Bear Run, bordé de jardinières en pierre brute, puis sous une série de poutres-treillis horizontales formant porte-cochère — l'une d'elles <strong>incurvée pour contourner le tronc d'un arbre préexistant</strong>, illustrant l'adaptation du bâti au site. Les passages intérieurs, volontairement sombres et étroits, sont plafonnés bas — <strong>jusqu'à 6 pieds 4 pouces (≈ 1,93 m)</strong> — créant une compression physique qui dirige le regard vers le paysage lors de l'entrée dans le séjour dilaté. Au bord du séjour, une <strong>trappe vitrée (glazed hatchway)</strong> s'ouvre sur un escalier suspendu aux soffites de la dalle, qui descend jusqu'au niveau du torrent.</p>
+    </div>
+    <div class="devices reveal">
+      <div class="device"><b class="n">01</b><h3>Dissolution des angles par le verre</h3><p>Fenêtres d'angle sans poteau ni meneau vertical (<em>corner-turning windows</em>) : le verre rencontre le verre, faisant disparaître les coins du volume bâti.</p></div>
+      <div class="device"><b class="n">02</b><h3>Encastrement direct verre-pierre</h3><p>Le vitrage est inséré directement dans une rainure (<em>groove</em>) ménagée dans le mur de pierre, sans cadre dormant : lecture continue de la maçonnerie, de l'intérieur vers l'extérieur.</p></div>
+      <div class="device"><b class="n">03</b><h3>Continuité des plans horizontaux</h3><p>Le dallage en grès se prolonge du séjour vers les terrasses ; les soffites des dalles de béton forment directement les plafonds, sans retombée de poutre apparente.</p></div>
+      <div class="device"><b class="n">04</b><h3>Palette chromatique restreinte</h3><p>Kaufmann écarte la proposition de feuilles d'or (<em>gold leaf</em>) : gris du grès, ocre clair sur enduit de ciment blanc de 1/4 de pouce, et rouge Cherokee pour les menuiseries en acier.</p></div>
+    </div>
+    <div class="pal reveal" aria-label="Palette chromatique">
+      <div><i style="background:#8f877a"></i> Gris naturel du grès de Pottsville</div>
+      <div><i style="background:#cfa254"></i> Ocre clair — « couleur d'une feuille de rhododendron morte »</div>
+      <div><i style="background:#b04a36"></i> Rouge Cherokee des menuiseries (rouge vénitien d'origine, remplacé dans les années 1970)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 STRUCTURE ================= -->
+<section id="structure" class="sec">
+  <div class="wrap">
+    <p class="kicker reveal">04 — Tectonique &amp; ingénierie structurelle</p>
+    <h2 class="reveal">Le système hybride, la <em>poutre en T inversé</em> et l'erreur de ferraillage</h2>
+    <div class="prose reveal">
+      <p>L'équilibre global repose sur un <strong>effet de contrepoids</strong> : au nord, l'édifice s'ancre dans le banc rocheux par des murs porteurs en maçonnerie de grès et la masse verticale de la cheminée ; au sud, les terrasses se projettent en porte-à-faux au-dessus de Bear Run. Le système constructif mixte est étudié par Wright avec <strong>Mendel Glickman</strong> (Madison, Wisconsin) et <strong>William Wesley Peters</strong> (Taliesin, également calculateur des colonnes de la Johnson Wax).</p>
+      <p>La fondation primaire est constituée de <strong>quatre grandes culées (bolsters)</strong> encastrées dans le banc de grès — trois en béton armé, la quatrième en maçonnerie de pierre. De ces appuis s'élancent <strong>quatre poutres maîtresses</strong> franchissant un porte-à-faux libre de 15 pieds (4,6 m), reliées transversalement par des <strong>solives de 4 × 23 pouces (10 × 58 cm) espacées de 4 pieds (1,22 m)</strong>.</p>
+    </div>
+    <div class="chips reveal">
+      <span class="chip"><b>4</b> culées (3 BA + 1 pierre)</span>
+      <span class="chip"><b>4</b> poutres maîtresses N–S</span>
+      <span class="chip">porte-à-faux libre <b>15′ (4,6 m)</b></span>
+      <span class="chip">solives <b>4″×23″</b> @ <b>4′</b> d'entraxe</span>
+      <span class="chip">dalle soffite inférieure <b>4″ (10 cm)</b></span>
+    </div>
+    <div class="mini2 reveal">
+      <div class="card"><span class="tag">Fonction architecturale</span><h3>Un soffite continu</h3><p>La dalle inférieure coulée monolithiquement <em>sous</em> les poutres et solives forme un plafond lisse au-dessus de la cascade et dans les pièces, dissimulant entièrement les poutres remontantes (<em>upturned beams</em>) dans une cavité interne recouverte de platelage en bois et des dalles de grès.</p></div>
+      <div class="card"><span class="tag">Fonction mécanique</span><h3>La table de compression en bas</h3><p>Un porte-à-faux travaille comme un plongeoir encastré : moment fléchissant <em>négatif</em>, traction dans la fibre supérieure, compression dans la fibre inférieure. La dalle continue en sous-face transforme chaque poutre maîtresse en <strong>poutre en T inversé</strong>, concentrant le béton dans la face comprimée.</p></div>
+    </div>
+
+    <blockquote class="reveal">« J'ai oublié le ferraillage négatif ! »<footer>— Mendel Glickman, ingénieur <em>("I forgot the negative reinforcing!")</em></footer></blockquote>
+
+    <div class="prose reveal">
+      <p>Dans les plans originaux, les poutres ne comportaient que <strong>8 barres d'armature</strong>. En février 1936, Kaufmann soumet les plans à des ingénieurs de Pittsburgh qui relèvent <strong>au moins huit problèmes structurels</strong>. La firme Metzger-Richardson recalcule les contraintes et conclut que le nombre de barres doit <strong>au minimum être doublé : 16 barres d'acier de 1 pouce</strong>. Wright y voit une attaque personnelle, menace d'abandonner le projet — <em>"If that's not good enough with you, to hell with the whole thing"</em> — mais le ferraillage supplémentaire est ajouté sur le chantier, supervisé par l'apprenti <strong>Robert (Bob) Mosher</strong>. En 2000, Robert Silman soulignera que Wright s'était clairement trompé : sans ces barres, <strong>les poutres auraient cédé</strong>.</p>
+    </div>
+    <div class="steel reveal" aria-label="Comparaison des barres d'armature">
+      <div class="srow"><span>PLANS WRIGHT · 1935</span><div class="ticks" data-n="8"></div><b>8</b></div>
+      <div class="srow red"><span>METZGER-RICHARDSON · 1936</span><div class="ticks" data-n="16"></div><b>16</b></div>
+    </div>
+
+    <!-- Diagramme interactif -->
+    <div class="diagram reveal">
+      <h3 style="margin-bottom:4px">Coupe nord–sud — système porteur &amp; superposition des déformées</h3>
+      <p style="font-size:13px;color:var(--mut);margin-bottom:12px">Glissez le curseur de 1936 à 2026 pour superposer la géométrie théorique et la déformée réelle (échelle des déformées exagérée) — le geste demandé pour la maquette d'étude (§ 4.3 du dossier).</p>
+      <svg viewBox="0 0 980 612" role="img" aria-label="Coupe schématique du porte-à-faux de Fallingwater">
+        <defs>
+          <pattern id="rock" width="14" height="14" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <rect width="14" height="14" fill="#191510"/>
+            <line x1="0" y1="0" x2="0" y2="14" stroke="#38301f" stroke-width="2.2"/>
+          </pattern>
+        </defs>
+        <!-- bedrock -->
+        <path d="M0,470 L640,470 L706,522 L980,522 L980,612 L0,612 Z" fill="url(#rock)" stroke="#4a4132"/>
+        <text class="sl" x="24" y="452">Banc de grès de Pottsville (bedrock)</text>
+        <!-- water -->
+        <g stroke="#4a6b78" stroke-width="2" fill="none" opacity=".85">
+          <path d="M712,540 q14,-7 28,0 t28,0 t28,0 t28,0 t28,0 t28,0 t28,0 t28,0"/>
+          <path d="M728,558 q14,-7 28,0 t28,0 t28,0 t28,0 t28,0 t28,0" opacity=".55"/>
+        </g>
+        <text class="sl" x="866" y="600">Bear Run</text>
+        <!-- chimney + bolster -->
+        <rect x="184" y="112" width="80" height="198" fill="#5f584d" stroke="#8f877a"/>
+        <text class="sl" x="24" y="98">Cheminée — masse verticale (contrepoids nord)</text>
+        <rect x="172" y="310" width="104" height="160" fill="#6f675b" stroke="#8f877a"/>
+        <text class="sl" x="24" y="300">Culée (bolster) — 3 BA + 1 pierre</text>
+        <!-- floor slab -->
+        <rect x="170" y="310" width="710" height="52" fill="#7e7566" stroke="#a2988a"/>
+        <rect x="170" y="310" width="330" height="52" fill="#8d8474"/>
+        <rect x="520" y="316" width="350" height="40" fill="#15120d"/>
+        <g fill="#a1957f">
+          <rect x="540" y="316" width="12" height="40"/><rect x="584" y="316" width="12" height="40"/><rect x="628" y="316" width="12" height="40"/><rect x="672" y="316" width="12" height="40"/><rect x="716" y="316" width="12" height="40"/><rect x="760" y="316" width="12" height="40"/><rect x="804" y="316" width="12" height="40"/><rect x="848" y="316" width="12" height="40"/>
+        </g>
+        <rect x="170" y="354" width="710" height="8" fill="#57503f"/>
+        <text class="sl" x="286" y="292">4 poutres maîtresses N–S</text>
+        <path d="M340,297 L330,308" stroke="#6b6355" fill="none"/>
+        <text class="sl" x="548" y="292">solives 4″×23″ @ 4′</text>
+        <path d="M600,297 L606,314" stroke="#6b6355" fill="none"/>
+        <text class="sl" x="596" y="398">dalle soffite 4″ (sous-face)</text>
+        <path d="M650,388 L640,362" stroke="#6b6355" fill="none"/>
+        <!-- upper terrace + parapet -->
+        <rect x="700" y="176" width="228" height="14" fill="#7e7566" stroke="#a2988a"/>
+        <rect x="904" y="126" width="20" height="50" fill="#7e7566" stroke="#a2988a"/>
+        <text class="sl" x="540" y="152">Terrasse du 2ᵉ étage (+6 pieds / 1,83 m)</text>
+        <path d="M700,157 L724,174" stroke="#6b6355" fill="none"/>
+        <!-- T mullions -->
+        <rect x="852" y="190" width="7" height="120" fill="#b04a36"/>
+        <rect x="872" y="190" width="7" height="120" fill="#b04a36"/>
+        <text class="sl" x="560" y="242">4 meneaux en T (acier) — transfert parasite de charge</text>
+        <path d="M840,246 L854,250" stroke="#6b6355" fill="none"/>
+        <!-- stair -->
+        <path d="M742,362 l11,11 l-11,11 l11,11 l-11,11 l11,11 l-11,11 l11,11 l-11,11 l11,11 l-11,11 l11,11 l-11,11 l10,10" stroke="#8f877a" stroke-width="2" fill="none"/>
+        <text class="sl" x="560" y="478">escalier suspendu vers le torrent</text>
+        <path d="M740,474 L752,470" stroke="#6b6355" fill="none"/>
+        <!-- PT cables -->
+        <path d="M196,332 L846,326 L898,182" stroke="#e06a4a" stroke-width="2.5" stroke-dasharray="7 5" fill="none"/>
+        <path d="M196,340 L840,334 L892,190" stroke="#e06a4a" stroke-width="2" stroke-dasharray="7 5" fill="none" opacity=".5"/>
+        <rect x="188" y="322" width="14" height="26" fill="#e06a4a"/>
+        <rect x="892" y="166" width="18" height="20" fill="#e06a4a"/>
+        <text class="sl" x="560" y="112">câbles de post-tension extérieure — ancrage sud (2001–02)</text>
+        <path d="M852,116 L897,164" stroke="#6b6355" fill="none"/>
+        <!-- moment diagram (toggle) -->
+        <g id="momentG" opacity="0">
+          <path d="M276,392 L276,510 C 520,510 720,470 880,392 Z" fill="rgba(224,106,74,.16)" stroke="#e06a4a" stroke-width="1.4" stroke-dasharray="4 4"/>
+          <text class="sl" x="330" y="480">M(x) — moment négatif : traction en fibre supérieure</text>
+        </g>
+        <!-- baseline + deflection -->
+        <line x1="276" y1="312" x2="880" y2="312" stroke="#6b6355" stroke-dasharray="3 6"/>
+        <path id="deflCurve" d="" stroke="#e06a4a" stroke-width="2.5" fill="none"/>
+        <line id="deflDrop" x1="880" y1="312" x2="880" y2="312" stroke="#e06a4a" stroke-width="1.2" stroke-dasharray="2 4"/>
+        <circle id="deflTip" cx="880" cy="312" r="4.5" fill="#e06a4a"/>
+        <text class="sl sm" x="956" y="24" text-anchor="end">déformée exagérée</text>
+      </svg>
+      <div class="d-controls">
+        <label for="dRange">Année</label>
+        <input type="range" id="dRange" min="1936" max="2026" step="1" value="1995" aria-label="Année de la déformée">
+        <button class="kbtn" data-year="1936">1936</button>
+        <button class="kbtn" data-year="1955">1955</button>
+        <button class="kbtn" data-year="1995">1995</button>
+        <button class="kbtn" data-year="2002">2002</button>
+        <button class="kbtn" id="mBtn">Afficher M(x)</button>
+      </div>
+      <div class="readout">
+        <div><small>Année</small><b id="dYear">1995</b></div>
+        <div><small>Flèche en tête</small><b id="dIn">7,00 po</b></div>
+        <div><small>Équivalent</small><b id="dMm">178 mm</b></div>
+        <p id="dStatus"></p>
+      </div>
+    </div>
+
+    <div class="gauges reveal">
+      <div class="gauge" data-val="41720" data-max="42000">
+        <div class="g-head"><span>Traction acier — fibre supérieure</span><span class="g-nums"><b class="g-count">0</b> psi <em>/ 42 000</em></span></div>
+        <div class="g-bar"><i></i><u style="left:100%"></u></div>
+        <p class="g-note">99,3 % de la limite d'élasticité — plastification de l'acier, rotule plastique au nu de culée (SAP 90, 1995–97).</p>
+      </div>
+      <div class="gauge" data-val="4380" data-max="5000">
+        <div class="g-head"><span>Compression béton</span><span class="g-nums"><b class="g-count">0</b> psi <em>/ 5 000</em></span></div>
+        <div class="g-bar"><i></i><u style="left:100%"></u></div>
+        <p class="g-note">87,6 % de la résistance ultime — modèle aux éléments finis testant trois hypothèses d'interaction salon / terrasse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 PATHOLOGIES ================= -->
+<section id="pathologies" class="sec" style="background:var(--bg2);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <p class="kicker reveal">05 — Anatomie des pathologies · 1936–1997</p>
+    <h2 class="reveal">Cheminement parasite, fluage et <em>rotule plastique</em></h2>
+    <div class="prose reveal">
+      <p>Même doublées à 16 barres, les poutres du premier niveau demeurent insuffisantes face à l'interaction imprévue avec la <strong>terrasse de la chambre principale au deuxième étage</strong>, qui s'étend de <strong>6 pieds (1,83 m) supplémentaires</strong> au-delà de la terrasse du premier étage. Son ferraillage de traction ne lui permet pas de se porter seule : <strong>quatre meneaux de fenêtre en acier profilés en T</strong>, encastrés dans le parapet sud du salon, soutiennent ses solives — transférant la charge de l'extrémité sud du deuxième étage directement sur le bord du porte-à-faux du premier étage, <strong>sans redimensionnement des poutres maîtresses</strong>.</p>
+    </div>
+    <div class="tl reveal">
+      <div class="tl-item"><time>DÉCEMBRE 1936 — DÉCOFFRAGE DU 1ᵉʳ ÉTAGE</time><p>Les entrepreneurs ayant omis d'incliner les coffrages pour compenser tassement et flèche, le retrait de l'échafaudage provoque un <strong>affaissement instantané de 1,75 pouce (44,5 mm)</strong>.</p></div>
+      <div class="tl-item"><time>HIVER 1936–1937 — FISSURATION DU 2ᵉ ÉTAGE</time><p>Deux larges fissures apparaissent dans les parapets de la terrasse supérieure. En janvier 1937, l'ingénieur de Kaufmann fait installer un <strong>mur de pierre sous la terrasse ouest</strong> ; Wright, le découvrant, fait retirer l'assise supérieure par Bob Mosher — le mur est ultérieurement démonté.</p></div>
+      <div class="tl-item"><time>1937–1955 — FLUAGE ET « RISING MILDEW »</time><p>Les essais de charge de 1937 montrent des contraintes aux marges de sécurité. Kaufmann engage un géomètre en 1941, puis fait relever les terrasses <strong>16 autres fois entre 1945 et 1955</strong>. Sous l'effet du <strong>fluage continu du béton</strong> (gâché manuellement par petits lots) et de la plastification de l'acier, la flèche progresse décennie après décennie. Poteaux provisoires en 1950 et 1953, vitres fissurées, portes coincées : Kaufmann surnomme sa maison <strong>« Rising Mildew »</strong>.</p></div>
+      <div class="tl-item"><time>1995–1997 — ANALYSE SAP 90 ET ÉTAIEMENT D'URGENCE</time><p>La flèche totale atteint <strong>7 pouces (≈ 180 mm)</strong> à l'extrémité du porte-à-faux. Les capteurs électroniques de Robert Silman Associates (18 mois de suivi, corrigés des variations thermiques) confirment fissures actives et tassement persistant. Le modèle <strong>SAP 90</strong> révèle 4 380 psi de compression béton (résistance ultime 5 000 psi) et <strong>41 720 psi de traction acier (limite 42 000 psi)</strong> : rotule plastique au nu de la culée. En <strong>avril 1997</strong>, un étaiement métallique provisoire (<em>temporary shoring</em>) est installé sous la terrasse principale.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 06 CONSERVATION ================= -->
+<section id="conservation" class="sec">
+  <div class="wrap">
+    <p class="kicker reveal">06 — Ingénierie de la conservation · 1988–2026</p>
+    <h2 class="reveal">Post-tension extérieure, étanchéité IRMA, <em>matrices FRCM</em></h2>
+    <div class="prose reveal">
+      <p>Pour stabiliser définitivement les trois poutres maîtresses critiques sous le salon tout en préservant l'aspect originel, <strong>Robert Silman</strong> et son associé <strong>John A. Matteo</strong> examinent quatre options : laisser l'étaiement en permanence, élargir la section des poutres, renforcer par fibres de carbone, ou appliquer une <strong>précontrainte extérieure par post-tension</strong>. Retenue pour sa charge morte minimale et sa dissimulation totale sous le dallage du séjour, elle structure un chantier de <strong>11,5 millions de dollars</strong> (2001–2002) mené avec Schupack Suarez et Structural Technologies.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><b class="n">1</b><h3>Démontage intégral &amp; cartographie</h3><p>Mobilier intégré et dallage déposés ; relevés pierre par pierre calqués sur photo-mosaïques puis numérisés, pour reposer chaque dalle à sa place d'origine.</p></div>
+      <div class="step"><b class="n">2</b><h3>Solives, injections, meneaux</h3><p>Quatre solives fracturées (côté est) remplacées ; fissures injectées de coulis ; les quatre meneaux en T renforcés par platines d'acier de 2 pouces soudées de part et d'autre.</p></div>
+      <div class="step"><b class="n">3</b><h3>Gaines &amp; câbles excentrés</h3><p>Gaines plastiques le long des poutres, tracé incliné remontant à travers solives forées et parapet sud ; ancrage au nord, tension depuis des blocs au sud : un moment positif qui équilibre le moment négatif.</p></div>
+      <div class="step"><b class="n">4</b><h3>Vérinage progressif instrumenté</h3><p>Mise en tension étalée sur plusieurs jours sous jauges de contrainte (<em>strain gauges</em>) de la Pennsylvania State University : 8 monotorons à ≈ 43 kips (191 kN), puis câbles multitorons 0,5″ à 7 fils basse relaxation injectés de coulis.</p></div>
+      <div class="step"><b class="n">5</b><h3>Soulèvement contrôlé &amp; retrait des étais</h3><p>Relèvement d'environ 3/4 de pouce (19 mm) ; flèche résiduelle de 6,25 pouces volontairement conservée pour éviter toute refissuration ; étais retirés en décembre 2002.</p></div>
+    </div>
+    <div class="chips reveal">
+      <span class="chip"><b>8</b> monotorons × <b>43 kips</b> (191 kN)</span>
+      <span class="chip"><b>2</b> câbles 13 torons × <b>390 kips</b> (1 735 kN)</span>
+      <span class="chip"><b>1</b> câble 10 torons (poutre ouest) × <b>300 kips</b> (1 334 kN)</span>
+      <span class="chip">relèvement <b>19 mm</b> · étais retirés <b>déc. 2002</b></span>
+      <span class="chip">coût global <b>11,5 M$</b></span>
+    </div>
+
+    <h3 style="margin-top:44px" class="reveal">Pathologies de l'enveloppe — WASA (1988–2005)</h3>
+    <div class="prose reveal">
+      <p>Parallèlement, une étude de 13 ans menée dès 1988 par les conservateurs de Wank Adams Slavin Associates (WASA) — <strong>Norman Weiss, Pamela Jerome, Stephen Gottlieb, Hazel Ephron</strong> — diagnostique la pénétration d'humidité comme cause première des pathologies matérielles (<strong>plus de 50 points de fuite chroniques</strong>) et conduit un programme de restauration en quatre phases (2001–2005) :</p>
+      <ul class="dots">
+        <li><strong>Ponts thermiques et condensation sous toiture :</strong> absence de rupture thermique sous les bords arrondis des dalles (<em>roof rolls</em>) → pourrissement du platelage en séquoia (<em>redwood decking</em>) et isolant saturé.</li>
+        <li><strong>Drainage sous-dimensionné et gel :</strong> chéneaux intégrés d'environ 3/4 de pouce de profondeur sur 4 pouces de largeur ; descentes en cuivre mal raccordées → eau gelée en périphérie, béton fissuré, stalactites de carbonate sur les soffites.</li>
+        <li><strong>Perméabilité à la vapeur bloquée :</strong> répétitions de Thoroseal / Acryl 60 / Thorosheen sur le stuc d'origine de 1/4 de pouce → perte de respirabilité de la paroi.</li>
+        <li><strong>Délamination géologique sélective :</strong> plans de litage (<em>bedding planes</em>) du grès calcareux des quartiers des domestiques — les meilleures pierres de la carrière ayant été extraites dès les premières phases.</li>
+      </ul>
+    </div>
+    <div class="rcards reveal">
+      <div class="rcard">
+        <h4>Terrasses en dalles de grès</h4>
+        <p><b>Pathologie</b>Absence d'étanchéité initiale ; pourrissement du platelage en séquoia ; gel autour des drains en cuivre.</p>
+        <p><b>Protocole 2001–2005</b>Système IRMA sur contreplaqué marin : W.R. Grace (<em>Procor</em> fluide + 2 plis <em>Bituthene 4000</em> + mastic), nappe <em>Amerdrain 350</em> (3/8 po), drains <em>J.R. Smith 1610</em> à double niveau, géotextile <em>Mirafi FW700</em>, lit de sable rond faiblement cimenté.</p>
+      </div>
+      <div class="rcard">
+        <h4>Fissures du béton et du stuc</h4>
+        <p><b>Pathologie</b>Fissuration du stuc blanc de 1/4 po ; perte de perméabilité à la vapeur par couches multiples de Thorosheen.</p>
+        <p><b>Protocole</b>Mortiers à microsphères céramiques (G-3500 Zeeospheres) : Mélange G (3:5:2 ciment Portland blanc : sable blanc de plâtrier : Zeeospheres) ; Mélange H (2:5) pour microfissures.</p>
+      </div>
+      <div class="rcard">
+        <h4>Jonctions toitures / murs de pierre</h4>
+        <p><b>Pathologie</b>Plus de 50 fuites chroniques ; absence de solins traversants (<em>through-wall flashings</em>) ; échec de l'EPDM de 1987–1988.</p>
+        <p><b>Protocole</b>Dressage au mortier (Type II : sable 1:2,5) ; système tri-couche à redondance ; solins encastrés cuivre 16 onces (terrasses), cuivre plombé (parapets), plomb (murs de pierre).</p>
+      </div>
+      <div class="rcard">
+        <h4>Lanterneaux (skylights) et treillis</h4>
+        <p><b>Pathologie</b>Stagnation d'eau (<em>ponding</em>) par blocage de 3 des 4 descentes ; fuites récurrentes aux lanterneaux du pont couvert.</p>
+        <p><b>Protocole</b>Réouverture de 3 descentes (la 4ᵉ, devant la porte de la bibliothèque, restant fermée) ; étanchéité liquide armée de voile polyester <em>Kemperol V210</em> sur les pinces d'angle en bronze.</p>
+      </div>
+      <div class="rcard">
+        <h4>Escalier suspendu vers le torrent</h4>
+        <p><b>Pathologie</b>Corrosion des suspentes en acier immergées lors des crues ; dégâts d'orages (reconstruit fin des années 1950).</p>
+        <p><b>Protocole</b>Cornières dos-à-dos remplacées par des suspentes en T en <strong>acier inoxydable</strong> décapées au standard SSPC-SP-5/NACE No. 1, primaire Tnemec 66 Hi-Build Epoxoline, finition 290 CRU (zones immergées) ou 1975 Endura-Shield II + 1070 Fluronar en rouge Cherokee.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:44px" class="reveal">Trente ans de conservation continue (2004–2026)</h3>
+    <div class="prose reveal">
+      <p>Documentée par le bilan de John A. Matteo, <em>Fallingwater: 30 Years of Structural Conservation</em> (CNI, juin 2025), la conservation se poursuit face au vieillissement des matériaux et aux crues violentes de Bear Run — comme l'inondation de <strong>juillet 2017</strong>, où un tronc emporté par le courant percuta le mur de pierre :</p>
+      <ul class="dots">
+        <li><strong>2004 — Fibres de carbone (FRP) :</strong> composites (<em>Carbon Fiber Composite Strengthening System</em>) appliqués pour consolider la terrasse ouest, après la post-tension de 2001 et l'escalier en inox de 2002.</li>
+        <li><strong>2019 — Treillis de l'allée :</strong> restauration des poutres-treillis de l'allée d'accès nord, l'année même de l'inscription à l'UNESCO.</li>
+        <li><strong>2021–2026 — FRCM :</strong> matrices cimentaires renforcées de fibres (<em>Fabric-Reinforced Cementitious Matrix</em>) et acier inoxydable pour fondations et pont (2021) ; puis, entre 2024 et 2026, injections de coulis (<em>grouting</em>) et renforcement FRCM des maçonneries et de la <strong>canopée de liaison</strong> reliant la maison principale à la maison d'hôtes.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 07 MÉTHODE ================= -->
+<section id="methode" class="sec paper">
+  <div class="wrap">
+    <p class="kicker reveal">07 — Plan de travail · Licence 3</p>
+    <h2 class="reveal">Un calendrier opérationnel en <em>12 semaines</em></h2>
+    <p class="lede reveal">Qu'il s'agisse d'un rapport de recherche, d'un séminaire d'histoire et théorie de l'architecture moderne ou d'une étude de cas constructive en atelier, la démarche s'articule autour d'une problématique précise — trois axes au choix — et d'un phasage rigoureux en cinq phases.</p>
+
+    <div class="cards3 reveal">
+      <button class="card axis" data-q="Comment Fallingwater réinterprète-t-elle les outils techniques de la modernité (béton en porte-à-faux, bandeaux vitrés) pour opposer au Style International de 1932 une architecture organique où la « destruction de la boîte » et la compression-dilatation ancrent l'expérience domestique dans la géomorphologie et l'acoustique de Bear Run ?">
+        <span class="tag">Axe A</span><h3>Histoire, théorie &amp; phénoménologie spatiale</h3>
+        <p>La modernité technique réinterprétée par l'architecture organique : boîte brisée, acoustique de Bear Run.</p>
+      </button>
+      <button class="card axis active" data-q="Quelle tension entre l'image d'une architecture organique défiant la gravité en harmonie avec les bancs rocheux de Pottsville et la réalité mécanique d'une structure sous-dimensionnée (T inversé, meneaux en T, rotule plastique), dont la pérennité repose sur un dispositif invisible de câbles de post-tension et de matrices FRCM ?">
+        <span class="tag">Axe B</span><h3>Tectonique, structure &amp; vérité constructive</h3>
+        <p>La tension entre l'image organique et la réalité mécanique d'une structure sauvée par des dispositifs invisibles.</p>
+      </button>
+      <button class="card axis" data-q="Comment conserver l'authenticité matérielle et l'intégrité visuelle d'un monument moderne inscrit à l'UNESCO lorsque les détails qui fondent son écriture — interpénétration pierre-béton sans solins, absence de coupure thermique des dalles, exposition permanente à l'eau sous ses trois états — constituent les causes directes de sa dégradation ?">
+        <span class="tag">Axe C</span><h3>Patrimoine du XXᵉ siècle &amp; physique de l'enveloppe</h3>
+        <p>Conserver l'authenticité matérielle quand les détails fondateurs de l'écriture causent la dégradation.</p>
+      </button>
+    </div>
+    <p id="axisChoice" class="reveal">→ Problématique retenue : cliquez sur un axe pour l'afficher ici.</p>
+
+    <div class="reveal" style="margin-top:40px">
+      <div class="phase">
+        <div class="ph-w">PHASE 1<span>Semaines 1 à 2</span><span>Éch. 1:500 / 1:200</span></div>
+        <div>
+          <h3>Immersion archivistique et géomorphologique</h3>
+          <p><strong>Objectifs :</strong> établir le fond de plan certifié et analyser le substrat géologique et hydrologique de Bear Run.</p>
+          <p><strong>Sources :</strong> relevés as-built HABS PA-1690 (Library of Congress, planches #99–#108 et #131–#135) ; étude géologique de Fred Zelt (GSA, 2023) ; monographie de Donald Hoffmann (1993).</p>
+          <div class="deliv"><b>Livrable — Planche 1</b>Plan de masse topographique et coupe géologique du vallon : strates de grès de Pottsville, carrière de 1935, orientation à 30°.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-w">PHASE 2<span>Semaines 3 à 5</span><span>Éch. 1:100</span></div>
+        <div>
+          <h3>Analyse morpho-spatiale et phénoménologique</h3>
+          <p><strong>Objectifs :</strong> décoder la séquence spatiale et les variations d'échelle humaine (compression/dilatation) et la « destruction de la boîte ».</p>
+          <p><strong>Sources :</strong> plans comparés des 3 niveaux (cotes d'archives Avery Library 3602 et 3812) ; textes d'Edgar Kaufmann, jr. (1986), Bruno Zevi (1962/1965), Neil Levine (1996).</p>
+          <div class="deliv"><b>Livrable — Planche 2</b>Plans-séquences des niveaux 1, 2 et 3 : hauteurs sous plafond (jusqu'à 6′4″), cônes de vision, angles vitrés sans meneau, coupe sur l'âtre rocheux et la trappe vitrée de l'escalier d'eau.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-w">PHASE 3<span>Semaines 6 à 8</span><span>Éch. 1:50 / 1:20</span></div>
+        <div>
+          <h3>Modélisation structurelle et diagnostic des pathologies</h3>
+          <p><strong>Objectifs :</strong> modéliser le schéma statique du porte-à-faux, expliquer le moment négatif, quantifier les causes de la flèche de 7 pouces.</p>
+          <p><strong>Sources :</strong> Robert Silman (<em>Scientific American</em>, 2000) ; Silman &amp; Matteo (<em>STRUCTURE</em>, 2001) ; schéma de flexion de la console de 15 pieds recevant les charges du 2ᵉ étage via les 4 meneaux en T.</p>
+          <div class="deliv"><b>Livrable — Planche 3</b>Axonométrie éclatée de la grille en béton armé (4 culées, 4 poutres maîtresses, solives 4″×23″ à 4′ d'entraxe, dalle soffite 4″ en T inversé), schéma des moments fléchissants et tracé des câbles de post-tension.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-w">PHASE 4<span>Semaines 9 à 10</span><span>Éch. 1:10 / 1:5</span></div>
+        <div>
+          <h3>Détails constructifs, enveloppe et conservation</h3>
+          <p><strong>Objectifs :</strong> analyser la matérialité fine, les ponts thermiques et les solutions de rétrofit patrimonial (WASA 2001–2005 ; Matteo 2021–2026).</p>
+          <p><strong>Sources :</strong> APT Bulletin Partie 1 (Weiss, Jerome, Gottlieb, 2001) et Partie 2 (Jerome, Weiss, Ephron, 2006) ; bilan de John Matteo (2025).</p>
+          <div class="deliv"><b>Livrable — Planche 4</b>Coupe au mur comparative « État 1937 vs État restauré 2005 » : rainure verre-pierre, complexe IRMA (Procor + Bituthene 4000 + Amerdrain 350), drain J.R. Smith 1610, suspentes inox de l'escalier.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="ph-w">PHASE 5<span>Semaines 11 à 12</span><span>Rendu final</span></div>
+        <div>
+          <h3>Synthèse critique, rédaction et soutenance</h3>
+          <p><strong>Objectifs :</strong> rédiger le mémoire analytique, finaliser la mise en page graphique, préparer la soutenance orale devant le jury.</p>
+          <p><strong>Méthode :</strong> croisement critique des sources (historiques, constructives, patrimoniales) ; vérification de l'appareil de notes et de la bibliographie normée.</p>
+          <div class="deliv"><b>Livrable — Dossier final L3</b>25 à 35 pages illustrées + 4 planches A1/A2 de redessin analytique + maquette structurelle d'étude à l'échelle 1:50 d'une travée de porte-à-faux.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="reveal" style="margin-top:44px">Protocole de production graphique et maquette d'étude</h3>
+    <div class="cards3 reveal">
+      <div class="card"><span class="tag">Démarche 1</span><h3>Exploiter le fonds HABS</h3><p>Les 10 planches as-built de la maison principale (#99–#108) et les 5 planches de la maison d'hôtes (#131–#135), réalisées vers 2010 dans le cadre du Historic American Buildings Survey, fournissent les relevés de l'édifice tel que construit — téléchargeables gratuitement en ligne.</p></div>
+      <div class="card"><span class="tag">Démarche 2</span><h3>Maquette analytique « écorchée » (1:50)</h3><p>Une coupe structurelle sur une travée nord-sud : banc de grès et culées, poutres en T inversé avec dalle de soffite de 4 pouces, caissonnage des solives, 4 meneaux en T soutenant la terrasse supérieure (+6 pieds), tracé incliné des gaines de post-tension et blocs d'ancrage.</p></div>
+      <div class="card"><span class="tag">Démarche 3</span><h3>Superposer 1936 / 1995 / 2002</h3><p>Sur les coupes 1:50, tracer en pointillé rouge l'affaissement de 1,75 pouce (1936), la flèche maximale de 7 pouces (1995) et le relèvement de 3/4 de pouce (2001–2002) — le visualiseur interactif de la section 04 matérialise cette lecture du comportement différé du béton armé.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 08 BIBLIO ================= -->
+<section id="biblio" class="sec paper" style="padding-top:0">
+  <div class="wrap">
+    <p class="kicker reveal">08 — Corpus bibliographique &amp; sources archivistiques</p>
+    <h2 class="reveal">Une bibliographie <em>de haut niveau</em></h2>
+    <p class="lede reveal">Sélection annotée : fonds d'archives primaires, monographies historiques, publications d'ingénierie et de conservation des matériaux — le socle documentaire d'un travail de niveau Licence 3 ou Master.</p>
+
+    <div class="biblio reveal">
+      <details open>
+        <summary>Fonds d'archives primaires, dessins originaux et relevés <span class="cnt">4</span></summary>
+        <div class="bib">
+          <p><b>Frank Lloyd Wright Foundation Archives</b> (The Museum of Modern Art | Avery Architectural &amp; Fine Arts Library, Columbia University, New York). Dessins originaux et correspondance de Wright ; <span class="id">Project 3602</span> (maison principale, incluant le dessin 3602.051) et <span class="id">3812</span> (maison d'hôtes), consultables via JSTOR (Drawings and Watercolors).</p>
+          <p><b>Edgar J. Kaufmann Papers on Fallingwater</b> (Avery, Columbia, <span class="id">ID catalogue 8971977</span>). Correspondance Wright / Kaufmann Sr. / apprentis de Taliesin (Edgar Tafel, Bob Mosher) / entrepreneurs ; dossiers de chantier, photographies, presse — dont la controverse de nov.–déc. 1937 sur le gauchissement des portes dû à l'humidité.</p>
+          <p><b>Historic American Buildings Survey (HABS), Library of Congress</b> (<span class="id">HABS PA-1690</span>). 136 documents numérisés en libre accès : photographies ~1985 (#1–98 ; #109–130) et relevés as-built ~2010 (#99–108 ; #131–136 ; #136 pour l'ancienne école).</p>
+          <p><b>UNESCO World Heritage Centre</b> (Paris, Dossier <span class="id">1496rev</span>). <i>The 20th-Century Architecture of Frank Lloyd Wright</i>, inscription juillet 2019, critère culturel (ii) ; Fallingwater = <span class="id">1496rev-005</span> (zone principale 11,212 ha ; zone tampon 282,299 ha).</p>
+        </div>
+      </details>
+      <details>
+        <summary>Monographies de référence, histoire critique <span class="cnt">8</span></summary>
+        <div class="bib">
+          <p><b>Toker, Franklin (2003 / rééd. 2005).</b> <i>Fallingwater Rising: Frank Lloyd Wright, E. J. Kaufmann, and America's Most Extraordinary House</i>. Knopf ; 496 p. (2005). Biographie historique et sociale issue de 18 années de recherches.</p>
+          <p><b>Hoffmann, Donald (1978 / 2ᵉ éd. 1993).</b> <i>Frank Lloyd Wright's Fallingwater: The House and Its History</i>. Dover, 128 p. Étude monographique fondamentale, appuyée sur les entretiens avec les apprentis et les archives de Bear Run.</p>
+          <p><b>Kaufmann, Edgar, jr. (1986).</b> <i>Fallingwater: A Frank Lloyd Wright Country House</i>. Abbeville Press, 190 p. Ouvrage du fils des commanditaires : photographies de chantier inédites, premiers plans mesurés, analyse esthétique détaillée.</p>
+          <p><b>Zevi, Bruno &amp; Kaufmann, Edgar, jr. (1962 / 1963 / 1965).</b> <i>La Casa sulla Cascata di F. Ll. Wright : 25 anni dopo</i>. ETAS Kompass. Texte clé de l'inscription de Fallingwater dans l'historiographie de l'architecture organique.</p>
+          <p><b>Zipf, Catherine W. (2021).</b> <i>Frank Lloyd Wright's Fallingwater: American Architecture in the Depression Era</i>. Routledge, 300 p. Réinterprétation à la lumière de la Grande Dépression, du New Deal et de l'évolution de la pratique de Wright.</p>
+          <p><b>Levine, Neil (1996).</b> <i>The Architecture of Frank Lloyd Wright</i>. Princeton University Press, 524 p. Analyse approfondie de l'œuvre, d'Oak Park au Guggenheim.</p>
+          <p><b>McCarter, Robert (1994 / 1997 / 2002).</b> <i>Fallingwater: Frank Lloyd Wright</i> ; <i>Frank Lloyd Wright</i>. Phaidon. Études architecturales détaillées sur l'organisation spatiale et tectonique.</p>
+          <p><b>McAndrew, John (1938).</b> <i>A New House by Frank Lloyd Wright on Bear Run, Pennsylvania</i>. MoMA, janvier 1938. Publication de la première exposition monographique consacrée à la maison.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Ingénierie structurelle, post-tension, éléments finis <span class="cnt">8</span></summary>
+        <div class="bib">
+          <p><b>Silman, Robert (septembre 2000).</b> « The Plan to Save Fallingwater ». <i>Scientific American</i>, pp. 88–95. Récit de première main : poutres en T inversé, rôle des 4 meneaux en T, suivi des fissures sur 18 mois, dispositif de post-tension.</p>
+          <p><b>Silman, Robert &amp; Matteo, John (2001).</b> « Repair and Retrofit: Is Fallingwater Falling Down ». <i>STRUCTURE Magazine</i>. Article technique de référence sur le diagnostic et le dimensionnement du renforcement.</p>
+          <p><b>Matteo, John A. (juin 2025).</b> <i>Fallingwater: 30 Years of Structural Conservation</i>. Consiglio Nazionale degli Ingegneri (CNI), Summary Report. Synthèse chronologique 1995–2026 : post-tension (2001), inox (2002), fibres de carbone (2004), FRCM (2021–2026).</p>
+          <p><b>Feldman, Gerard (septembre 2005).</b> « Fallingwater is No Longer Falling ». <i>STRUCTURE Magazine</i>, pp. 46–50. Placement des armatures avant/après réparation et rôle des quatre meneaux de fenêtre.</p>
+          <p><b>Loper, James &amp; Hughes, Jason (avril 2003).</b> « Post-Tensioned Retrofitting Maintains Landmark's Aesthetics ». <i>Concrete International</i>. Méthodes d'inspection, choix du système, défis d'exécution.</p>
+          <p><b>Gonchar, Joann (mars 2002).</b> « 'Wrighting' a Fragile Landmark Sagging for Nearly 65 Years ». <i>ENR / Architectural Record</i>, pp. 84–90. Séquence de mise en tension (43 kips → 390 kips) et renforcement des meneaux.</p>
+          <p><b>Dean, Louise (mars 2003).</b> « Analyzing and Characterizing the Steel Used at Frank Lloyd Wright's Fallingwater ». <i>Materials World</i>. Analyse métallurgique des aciers d'origine.</p>
+          <p><b>Brown, J. (2002) &amp; Wald, Matthew (2001).</b> « Fallingwater Restoration Uncovers More Damage » (<i>Civil Engineering</i>) ; « Rescuing a World-Famous but Fragile House » (<i>The New York Times</i>). Découvertes lors de l'ouverture des planchers de béton.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Conservation des matériaux, hygrothermique &amp; géologie <span class="cnt">4</span></summary>
+        <div class="bib">
+          <p><b>Weiss, Norman ; Jerome, Pamela &amp; Gottlieb, Stephen (2001).</b> « Fallingwater Part 1: Materials-Conservation Efforts at Frank Lloyd Wright's Masterpiece ». <i>APT Bulletin</i>, Vol. 32, No. 4, pp. 44–55 (JSTOR : <span class="id">stable/1504772</span>). Treize années d'investigations WASA sur les mécanismes de dégradation non structurels.</p>
+          <p><b>Jerome, Pamela ; Weiss, Norman &amp; Ephron, Hazel (2006).</b> « Fallingwater Part 2 ». <i>APT Bulletin</i>, Vol. 37, No. 2–3, pp. 3–11. Programme de restauration en quatre phases 2001–2005 : dépose numérisée du séjour, étanchéité IRMA, drains, solins, lanterneaux, escalier en inox.</p>
+          <p><b>Zelt, Fred ; Shaulis, Jim &amp; Pazzaglia, Frank (septembre 2023).</b> « Geologic setting and organic architecture of Fallingwater ». In <i>Field Excursions to the Appalachian Plateaus… GSA Connects 2023</i>, Field Guide 66, pp. 29–78. <span class="id">DOI 10.1130/2023.0066(02)</span>. Première étude géologique complète : grès de Pottsville, géomorphologie de Bear Run, architecture organique.</p>
+          <p><b>« 20th-Century World Built Heritage Facing Water: Conservation of Fallingwater and Boa Nova Tea House » (septembre 2024).</b> <i>Buildings</i> (MDPI), Vol. 14, No. 9, article 3004. Pathologies liées à l'eau, systèmes constructifs mixtes, conservation préventive de la Valeur Universelle Exceptionnelle.</p>
+        </div>
+      </details>
+    </div>
+    <p class="reveal" style="font-size:13px;color:#8a7c64;margin-top:18px">+ 70 références « works cited » consultées dans le dossier source (Britannica, Penn State College of Engineering, archdaily, Architectural Record, TCLF, Wikidata, etc.).</p>
+  </div>
+</section>
+
+<!-- ================= 09 GALERIE ================= -->
+<section id="galerie" class="sec">
+  <div class="wrap">
+    <p class="kicker reveal">09 — Galerie photographique</p>
+    <h2 class="reveal">La maison, en <em>photographies réelles</em></h2>
+    <p class="lede reveal">Images chargées en direct depuis Wikimedia Commons (catégorie « Fallingwater »). Chaque légende renvoie à la source et à son auteur.</p>
+    <div class="gal" id="gallery"></div>
+    <p id="galNote"></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap fgrid">
+    <div>
+      <p class="fbrand">Fallingwater<span style="color:var(--ocre)">.</span></p>
+      <p style="margin-top:10px">Dossier d'étude Licence 3 — d'après le rapport « Recherche architecturale, analyse structurelle et plan de travail méthodologique : Fallingwater (Frank Lloyd Wright, 1935–1939) ».</p>
+      <a class="toplink" href="#hero">↑ Haut de page</a>
+    </div>
+    <div>
+      <h4>Photographies</h4>
+      <p>Chargées depuis Wikimedia Commons ; chaque image et vignette renvoie à son fichier source et à son auteur (licence respective). Hors connexion, une liste de secours est utilisée et les éléments indisponibles sont masqués.</p>
+    </div>
+    <div>
+      <h4>Avertissement</h4>
+      <p>Site pédagogique non officiel. Données techniques d'après les sources citées en section 08. Schémas : documents d'étude — échelles des déformées exagérées à des fins pédagogiques.</p>
+      <p style="margin-top:10px">Mill Run, Pennsylvanie · 1936–1939 · UNESCO 2019</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lb" class="lb" hidden role="dialog" aria-modal="true" aria-label="Visionneuse d'images">
+  <button class="x" id="lbClose" aria-label="Fermer">✕</button>
+  <button class="pv" id="lbPrev" aria-label="Image précédente">‹</button>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+  <button class="nx" id="lbNext" aria-label="Image suivante">›</button>
+</div>
+
+<script>
+/* ---------- barre de progression ---------- */
+const prog=document.getElementById('progress');
+addEventListener('scroll',()=>{const h=document.documentElement;
+prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+
+/* ---------- menu mobile ---------- */
+const nav=document.getElementById('nav');
+document.getElementById('burger').addEventListener('click',()=>nav.classList.toggle('open'));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+/* ---------- apparitions ---------- */
+const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ---------- scrollspy ---------- */
+const spy=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id))}})},{rootMargin:'-38% 0px -55% 0px'});
+document.querySelectorAll('main section[id]').forEach(s=>spy.observe(s));
+
+/* ---------- compteurs ---------- */
+function fmt(n,dec){return dec?n.toFixed(dec).replace('.',','):Math.round(n).toLocaleString('fr-FR')}
+function countUp(el){const to=parseFloat(el.dataset.to),dec=+(el.dataset.dec||0),t0=performance.now(),D=1400;
+  (function f(t){let p=Math.min(1,(t-t0)/D);p=1-Math.pow(1-p,3);
+  el.textContent=fmt(to*p,dec);if(p<1)requestAnimationFrame(f)})(t0)}
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){countUp(e.target);co.unobserve(e.target)}}),{threshold:.5});
+document.querySelectorAll('.num').forEach(el=>co.observe(el));
+
+/* ---------- jauges ---------- */
+const go=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const g=e.target;
+  g.querySelector('i').style.width=(+g.dataset.val/+g.dataset.max*100)+'%';
+  const c=g.querySelector('.g-count');c.dataset.to=g.dataset.val;countUp(c);go.unobserve(g)}}),{threshold:.4});
+document.querySelectorAll('.gauge').forEach(g=>go.observe(g));
+
+/* ---------- barres d'acier 8 / 16 ---------- */
+document.querySelectorAll('.ticks').forEach(t=>{const n=+t.dataset.n;
+  for(let k=0;k<n;k++)t.appendChild(document.createElement('i'))});
+
+/* ---------- visualiseur de déformée ---------- */
+const KEYS=[[1936,1.75],[1937,2.1],[1941,2.6],[1945,3.0],[1955,3.8],[1965,4.6],[1975,5.4],[1985,6.2],[1995,7.0],[1997,7.0],[2001,7.0],[2002,6.25],[2026,6.25]];
+function deflAt(y){for(let i=0;i<KEYS.length-1;i++){const[a,va]=KEYS[i],[b,vb]=KEYS[i+1];
+  if(y>=a&&y<=b)return va+(vb-va)*(y-a)/(b-a)}return 6.25}
+const PXPI=9,BASE=312,X0=276,X1=880;
+const curve=document.getElementById('deflCurve'),tip=document.getElementById('deflTip'),
+drop=document.getElementById('deflDrop'),dYear=document.getElementById('dYear'),
+dIn=document.getElementById('dIn'),dMm=document.getElementById('dMm'),
+dStatus=document.getElementById('dStatus'),slider=document.getElementById('dRange');
+function statusFor(y){
+  if(y<1937)return"Décembre 1936 — décoffrage : affaissement instantané de 1,75 po (44,5 mm). Les coffrages n'avaient pas été inclinés.";
+  if(y<1941)return"Hiver 1936–37 : fissuration des parapets de la terrasse supérieure ; mur de pierre posé puis démonté sur ordre de Wright (Bob Mosher).";
+  if(y<1956)return"Fluage du béton (gâché à la main par petits lots) + plastification de l'acier — 17 relevés topographiques commandés par Kaufmann (1941–1955).";
+  if(y<1995)return"Le fluage progresse décennie après décennie : poteaux provisoires (1950, 1953), vitres fissurées, portes coincées — « Rising Mildew ».";
+  if(y<1997)return"Alerte structurelle : capteurs Silman pendant 18 mois — fissures actives, terrasses encore en tassement.";
+  if(y<1998)return"1997 — SAP 90 : acier à 41 720 psi ≈ limite 42 000 psi, rotule plastique au nu de culée ; étaiement métallique d'urgence installé en avril.";
+  if(y<2002)return"Étaiement provisoire maintenu sous la terrasse principale dans l'attente du renforcement par post-tension.";
+  if(y<2003)return"2002 — post-tension extérieure : relèvement de 3/4 po (19 mm) au-dessus des étais ; flèche résiduelle de 6,25 po maintenue volontairement ; étais retirés en décembre.";
+  return"Structure stabilisée et surveillée — consolidations FRCM des maçonneries et de la canopée de liaison (2021–2026).";
+}
+function setYear(y){y=+y;const v=deflAt(y),d=v*PXPI;
+  curve.setAttribute('d',`M ${X0} ${BASE} C ${X0+230} ${BASE}, ${X0+460} ${BASE+d*0.55}, ${X1} ${BASE+d}`);
+  tip.setAttribute('cy',BASE+d);drop.setAttribute('y2',BASE+d);
+  dYear.textContent=y;
+  dIn.textContent=v.toFixed(2).replace('.',',')+' po';
+  dMm.textContent=Math.round(v*25.4)+' mm';
+  dStatus.textContent=statusFor(y);slider.value=y}
+slider.addEventListener('input',e=>setYear(e.target.value));
+document.querySelectorAll('.kbtn[data-year]').forEach(b=>b.addEventListener('click',()=>setYear(b.dataset.year)));
+setYear(1995);
+
+/* ---------- toggle moment ---------- */
+let mo=false;
+document.getElementById('mBtn').addEventListener('click',function(){mo=!mo;
+  document.getElementById('momentG').style.opacity=mo?1:0;this.classList.toggle('on',mo)});
+
+/* ---------- axes de problématisation ---------- */
+const axs=document.querySelectorAll('.axis'),axQ=document.getElementById('axisChoice');
+axs.forEach(a=>a.addEventListener('click',()=>{axs.forEach(x=>x.classList.remove('active'));
+  a.classList.add('active');axQ.textContent='→ Problématique retenue : '+a.dataset.q}));
+const act=document.querySelector('.axis.active');
+if(act)axQ.textContent='→ Problématique retenue : '+act.dataset.q;
+
+/* ---------- chaînes d'images (secours en cascade) ---------- */
+document.querySelectorAll('img[data-chain]').forEach(img=>{let list;
+  try{list=JSON.parse(img.dataset.chain)}catch(e){return}
+  let i=0;const nx=()=>{if(i>=list.length){img.style.display='none';
+    const f=img.closest('figure');if(f)f.style.display='none';return}
+    img.src=list[i++]};
+  img.addEventListener('error',nx);nx()});
+
+/* ---------- lightbox ---------- */
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),
+lbCap=document.getElementById('lbCap');let lbList=[],lbI=0;
+function showLB(){const it=lbList[lbI];if(!it)return;
+  lbImg.src=it.full||it.src;lbCap.innerHTML=it.cap||''}
+function openLB(items,i){lbList=items;lbI=i;showLB();lb.hidden=false;
+  document.body.style.overflow='hidden'}
+function closeLB(){lb.hidden=true;document.body.style.overflow=''}
+document.getElementById('lbClose').addEventListener('click',closeLB);
+document.getElementById('lbPrev').addEventListener('click',()=>{lbI=(lbI-1+lbList.length)%lbList.length;showLB()});
+document.getElementById('lbNext').addEventListener('click',()=>{lbI=(lbI+1)%lbList.length;showLB()});
+lb.addEventListener('click',e=>{if(e.target===lb)closeLB()});
+document.addEventListener('keydown',e=>{if(lb.hidden)return;
+  if(e.key==='Escape')closeLB();
+  if(e.key==='ArrowLeft'){lbI=(lbI-1+lbList.length)%lbList.length;showLB()}
+  if(e.key==='ArrowRight'){lbI=(lbI+1)%lbList.length;showLB()}});
+document.addEventListener('click',e=>{const im=e.target.closest('.zoomable');if(!im)return;
+  const figs=[...document.querySelectorAll('.zoomable')].filter(z=>z.src&&z.closest('figure')&&z.closest('figure').offsetParent!==null);
+  const items=figs.map(z=>({full:z.dataset.full||z.src,src:z.src,
+    cap:z.closest('figure').querySelector('figcaption')?z.closest('figure').querySelector('figcaption').innerHTML:''}));
+  const idx=figs.indexOf(im);openLB(items,idx<0?0:idx)});
+
+/* ---------- galerie dynamique (Wikimedia Commons) ---------- */
+const gal=document.getElementById('gallery'),galNote=document.getElementById('galNote');
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function strip(h){const d=document.createElement('div');d.innerHTML=h||'';return d.textContent.trim()}
+function addFig(src,full,capHTML,alt){
+  const f=document.createElement('figure');f.className='gitem';
+  f.innerHTML=`<img class="zoomable" loading="lazy" decoding="async" src="${src}" data-full="${full}" alt="${esc(alt)}"><figcaption>${capHTML}</figcaption>`;
+  f.querySelector('img').addEventListener('error',()=>f.remove());
+  gal.appendChild(f)}
+const CP='https://commons.wikimedia.org/wiki/Special:FilePath/';
+(async()=>{
+  try{
+    const api='https://commons.wikimedia.org/w/api.php?action=query&generator=categorymembers&gcmtitle=Category%3AFallingwater&gcmtype=file&gcmlimit=60&prop=imageinfo&iiprop=url%7Csize%7Cmime%7Cextmetadata&iiurlwidth=1400&iiextmetadatafilter=Artist%7CLicenseShortName&format=json&origin=*';
+    const r=await fetch(api);if(!r.ok)throw new Error('http '+r.status);
+    const j=await r.json();const pages=Object.values((j.query&&j.query.pages)||{});
+    let items=[];
+    for(const p of pages){const ii=p.imageinfo&&p.imageinfo[0];if(!ii)continue;
+      if(!/^image\/(jpeg|png)$/.test(ii.mime||''))continue;
+      if((ii.width||0)<1100||(ii.height||0)<700)continue;
+      const t=(p.title||'').replace(/^File:/,'');
+      if(/plan|section|drawing|sketch|diagram|map|axonometr|logo|render/i.test(t))continue;
+      const artist=strip(ii.extmetadata&&ii.extmetadata.Artist&&ii.extmetadata.Artist.value);
+      const lic=strip(ii.extmetadata&&ii.extmetadata.LicenseShortName&&ii.extmetadata.LicenseShortName.value);
+      items.push({w:ii.width,thumb:ii.thumburl,full:ii.url,t,artist,lic,page:ii.descriptionurl})}
+    if(!items.length)throw new Error('vide');
+    items.sort((a,b)=>b.w-a.w);items=items.slice(0,18);
+    items.forEach(it=>{const cap=`${esc(it.t)}${it.artist?' — '+esc(it.artist):''}${it.lic?' · '+esc(it.lic):''} <a href="${it.page}" target="_blank" rel="noopener">source ↗</a>`;
+      addFig(it.thumb,it.full,cap,it.t)});
+    galNote.textContent='✓ '+items.length+' photographies chargées en direct depuis Wikimedia Commons.';
+  }catch(e){
+    const names=['FallingwaterHartz1.jpg','Fallingwater2.jpg','Fallingwater3.jpg','Fallingwater1.jpg','Fallingwater4.jpg','Fallingwater5.jpg','Fallingwater6.jpg','Fallingwater%20-%20DSC05639.JPG','Fallingwater%20Waterfall.jpg','Fallingwater%20in%20Winter.jpg'];
+    names.forEach(n=>{const page='https://commons.wikimedia.org/wiki/File:'+decodeURIComponent(n);
+      const cap=`Wikimedia Commons — <a href="${page}" target="_blank" rel="noopener">${decodeURIComponent(n)} ↗</a>`;
+      addFig(CP+n+'?width=1400',CP+n+'?width=2000',cap,'Fallingwater, Mill Run, Pennsylvanie')});
+    galNote.textContent='Liste de secours Wikimedia Commons (les fichiers indisponibles sont masqués automatiquement).';
+  }
+})();
+</script>
+</body>
+</html>
